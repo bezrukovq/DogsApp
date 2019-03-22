@@ -16,9 +16,6 @@ class MainActivity : AppCompatActivity() {
         var appComponent: AppComponent? = null
     }
 
-    private var listSelected = true
-    private var menu: Menu? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
