@@ -2,14 +2,10 @@ package com.example.dogsapp.di.module
 
 import android.app.Application
 import android.content.Context
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 
-@Module
-class AppModule(private val app: Application) {
-
-    @Provides
-    @Singleton
-    fun provideApp(): Context = app
+fun appModule(app: Application) = Kodein.Module {
+    bind<Context>() with singleton { app }
 }
