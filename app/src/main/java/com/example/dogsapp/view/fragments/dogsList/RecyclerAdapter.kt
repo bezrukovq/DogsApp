@@ -1,16 +1,16 @@
-package com.example.dogsapp.view.fragments.dateList
+package com.example.dogsapp.view.fragments.dogsList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsapp.R
 
-class RecyclerAdapter(private var onItemClick: (Int) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
+class RecyclerAdapter(private var onItemClick: (String) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
-    var list: ArrayList<Int> = arrayListOf()
+    var list: ArrayList<String> = arrayListOf()
     override fun getItemCount() = list.size
 
-    fun addAll(values: List<Int>) {
+    fun addAll(values: List<String>) {
         for (value in values) {
             list.add(value)
             notifyItemInserted(list.size)

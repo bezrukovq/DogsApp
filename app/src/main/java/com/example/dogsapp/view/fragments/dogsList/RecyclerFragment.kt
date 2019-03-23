@@ -1,4 +1,4 @@
-package com.example.dogsapp.view.fragments.dateList
+package com.example.dogsapp.view.fragments.dogsList
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,16 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsapp.R
 import com.example.dogsapp.di.component.DaggerDateComponent
 import com.example.dogsapp.di.module.DateModule
+import com.example.dogsapp.helpers.FragmentHelper
+import com.example.dogsapp.model.DogsModel
 import com.example.dogsapp.view.MainActivity
+import com.example.dogsapp.view.fragments.dogsDetail.DogsDetailFragment
 import kotlinx.android.synthetic.main.fragment_recycler.*
 
 @SuppressLint("Registered")
 class RecyclerFragment : Fragment() {
-    //hz kak v dagger
+
     var recyclerAdapter = RecyclerAdapter { onItemClick(it) }
 
 
@@ -38,10 +40,11 @@ class RecyclerFragment : Fragment() {
         val manager = LinearLayoutManager(context)
         recycler_view.adapter = recyclerAdapter
         recycler_view.layoutManager = manager
+        recyclerAdapter.addAll(DogsModel.getBreedList())
     }
 
-    private fun onItemClick(int: Int) {}
-        //dateListPresenter.openDate(int)
+    private fun onItemClick(dog: String) =
+        FragmentHelper.openFragment(this.activity,R.id.container,DogsDetailFragment.newInstance(dog))
 
     companion object {
         fun newInstance(): RecyclerFragment {

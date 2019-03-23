@@ -1,8 +1,7 @@
 package com.example.dogsapp.di.module
 
-import android.content.Context
 import com.example.dogsapp.di.scope.DateScope
-import com.example.dogsapp.view.fragments.dateList.RecyclerAdapter
+import com.example.dogsapp.view.fragments.dogsList.RecyclerAdapter
 import dagger.Module
 import dagger.Provides
 

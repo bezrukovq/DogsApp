@@ -8,12 +8,12 @@ object ApiFactory {
 
     private const val URL = "https://dog.ceo/api/breed/"
 
-    fun createApi(): NumFacApiService {
+    fun createApi(): DogsApiService {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(URL)
             .build()
-        return retrofit.create(NumFacApiService::class.java)
+        return retrofit.create(DogsApiService::class.java)
     }
 }

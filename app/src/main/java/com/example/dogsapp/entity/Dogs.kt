@@ -1,8 +1,6 @@
-package com.example.numfac.entity
-
-import java.net.URL
+package com.example.dogsapp.entity
 
 data class Dogs(
-    val breed: String?,
-    val img: URL?
+        val status: String,
+        val message: String
 )

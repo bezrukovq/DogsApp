@@ -1,7 +1,6 @@
 package com.example.dogsapp.view
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dogsapp.R
 import com.example.dogsapp.di.component.AppComponent
@@ -9,7 +8,7 @@ import com.example.dogsapp.di.component.DaggerAppComponent
 import com.example.dogsapp.di.module.AppModule
 import com.example.dogsapp.di.module.NetModule
 import com.example.dogsapp.di.module.ServiceModule
-import com.example.dogsapp.view.fragments.dateList.RecyclerFragment
+import com.example.dogsapp.view.fragments.dogsList.RecyclerFragment
 
 class MainActivity : AppCompatActivity() {
     companion object {
