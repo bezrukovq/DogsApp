@@ -1,5 +1,6 @@
 package com.example.dogsapp.di.module
 
+import com.example.dogsapp.model.DogsApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -8,8 +9,8 @@ import javax.inject.Singleton
 @Module
 class ServiceModule {
 
-   /* @Provides
+    @Provides
     @Singleton
-    fun provideNumFacApiService(retrofit: Retrofit): NumFacApiService =
-        retrofit.create(NumFacApiService::class.java)*/
+    fun provideNumFacApiService(retrofit: Retrofit): DogsApiService =
+        retrofit.create(DogsApiService::class.java)
 }

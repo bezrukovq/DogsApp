@@ -40,7 +40,6 @@ class NetModule {
     fun provideBaseUrlString(): String = URL
 
     companion object {
-        private const val URL = "http://numbersapi.com/"
+        private const val URL = "https://dog.ceo/api/breed/"
     }
-
 }
