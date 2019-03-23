@@ -12,7 +12,7 @@ class DogModule {
 
     @Provides
     @DogScope
-    fun provideNumFacModel(numFacApiService: DogsApiService): DogsModel =
+    fun provideDogsModel(numFacApiService: DogsApiService): DogsModel =
         DogsModel(numFacApiService)//
 
     @Provides

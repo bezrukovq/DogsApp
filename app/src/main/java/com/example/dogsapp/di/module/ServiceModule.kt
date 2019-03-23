@@ -11,6 +11,6 @@ class ServiceModule {
 
     @Provides
     @Singleton
-    fun provideNumFacApiService(retrofit: Retrofit): DogsApiService =
+    fun provideDogsApiService(retrofit: Retrofit): DogsApiService =
         retrofit.create(DogsApiService::class.java)
 }
