@@ -1,0 +1,65 @@
+package com.example.dogsapp.model
+
+import android.content.Context
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.*
+
+object NumFacModel {
+
+    val dogApi: DogsApiService = ApiFactory.createApi()
+    //var db: AppDataBase? = null
+    //var dateRepository: DateRepository? = null
+    /*
+    fun setDB(applicationContext: Context) {
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDataBase::class.java,
+            "database"
+        )
+            .build()
+        dateRepository = db?.dateDao()?.let { DateRepository(it) }
+    }
+
+    fun getFavDateList(): Single<List<DateDB>>? =
+        dateRepository?.getAllDates()
+
+    fun addToFavList(dateDB: DateDB) =
+        dateRepository?.addDate(dateDB)?.subscribe()
+
+    fun deleteFromFavList(dateDB: DateDB) =
+        dateRepository?.deleteDate(dateDB)?.subscribe()
+
+    fun getDateInfo(numDate: Int): Single<Date> =
+        numApi.getDateInfo(numDate)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun getDateList(): ArrayList<Int> {
+        val list = ArrayList<Int>()
+        val today = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+        for (item: Int in today..today + COUNTER)
+            list.add(item)
+        curNumber = today + COUNTER + 1
+        return list
+    }
+
+    fun expandDateList(itemsCount: Int): ArrayList<Int> {
+        val list = ArrayList<Int>()
+        for (item: Int in curNumber..curNumber + itemsCount) {
+            if (curNumber <= LAST_DATE)
+                list.add(item)
+        }
+        curNumber += itemsCount + 1
+        return list
+    }
+    */
+    fun getBreedList(): ArrayList<String> {
+        val list = ArrayList<String>()
+        list.add("african")
+        //curNumber = today + COUNTER + 1
+        return list
+    }
+
+}
