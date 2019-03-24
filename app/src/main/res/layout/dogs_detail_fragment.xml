@@ -7,7 +7,7 @@
     tools:context=".view.fragments.dogsDetail.DogsDetailFragment">
 
     <TextView
-        android:id="@+id/tv_breed"
+        android:id="@+id/tv_breed_det"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:translationZ="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toTopOf="@+id/tv_breed_det"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

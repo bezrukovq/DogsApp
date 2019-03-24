@@ -30,11 +30,11 @@ class RecyclerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(DogsListViewModel::class.java)
-        observeMovieList()
+        observeDogsList()
         viewModel.getBreedList()
     }
 
-    private fun observeMovieList() =
+    private fun observeDogsList() =
         viewModel.breedList.observe(this, Observer { dogList ->
             updateList(dogList)
         })
