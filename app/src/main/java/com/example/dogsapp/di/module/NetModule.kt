@@ -30,6 +30,3 @@ fun netModule() = Kodein.Module {
             .addConverterFactory(converterFactory)
             .baseUrl("https://dog.ceo/api/breed/")
             .build()
-
-
-

@@ -14,12 +14,11 @@ import com.example.dogsapp.di.di
 import com.example.dogsapp.vm.BaseViewModelFactory
 
 import com.example.dogsapp.vm.DogsDetailViewModel
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dogs_detail_fragment.*
 import org.kodein.di.generic.instance
-
-
-
+import java.lang.Exception
 
 class DogsDetailFragment : Fragment() {
 
@@ -33,7 +32,8 @@ class DogsDetailFragment : Fragment() {
             .inflateTransition(R.transition.shared_element_transition)
         sharedElementEnterTransition = transition*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.slide_left)
+            sharedElementEnterTransition =
+                TransitionInflater.from(context).inflateTransition(android.R.transition.slide_left)
         }
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(DogsDetailViewModel::class.java)
         viewModel.showProgress.observe(this, Observer { aBoolean ->
@@ -48,26 +48,31 @@ class DogsDetailFragment : Fragment() {
         viewModel.getDogPic(dogBreed)
         viewModel.getDogBreed(dogBreed)
         viewModel.dogData.observe(this, Observer { dog -> setImg(dog.message) })
-        viewModel.dogBreed.observe(this, Observer {dogBreed -> setText(dogBreed)})
+        viewModel.dogBreed.observe(this, Observer { breed -> setText(breed) })
 
     }
 
     private fun setImg(img: String) {
-        Picasso.get().load(img).into(iv_dog_img)
+        Picasso.get().load(img).into(iv_dog_img, object : Callback {
+            override fun onError(e: Exception?) {}
+            override fun onSuccess() {
+                hideProgress()
+            }
+        })
     }
 
-    private fun setText(text: String){
+    private fun setText(text: String) {
         tv_breed_det.text = text
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.dogs_detail_fragment, container, false)
+        inflater.inflate(R.layout.dogs_detail_fragment, container, false)
 
     fun showProgress() {
         pb.visibility = View.VISIBLE
     }
 
-    fun hideProgress(){
+    fun hideProgress() {
         pb.visibility = View.GONE
     }
 

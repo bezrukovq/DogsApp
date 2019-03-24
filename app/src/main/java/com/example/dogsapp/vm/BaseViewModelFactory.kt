@@ -8,11 +8,11 @@ class BaseViewModelFactory(private val dogsModel: DogsModel) : ViewModelProvider
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         when {
-            modelClass.isAssignableFrom(DogsDetailViewModel::class.java) -> {
+            modelClass.isAssignableFrom(DogsDetailViewModel::class.java) ->
                 DogsDetailViewModel(dogsModel) as? T
                     ?: throw IllegalArgumentException("Unknown ViewModel class")
-            }
-            else -> {
+
+            else ->
                 when {
                     modelClass.isAssignableFrom(DogsListViewModel::class.java) -> {
                         DogsListViewModel(dogsModel) as? T
@@ -22,7 +22,5 @@ class BaseViewModelFactory(private val dogsModel: DogsModel) : ViewModelProvider
                         throw IllegalArgumentException("Unknown ViewModel class")
                     }
                 }
-            }
         }
 }
-

@@ -7,7 +7,6 @@ import com.example.dogsapp.entity.Dogs
 import com.example.dogsapp.model.DogsModel
 import io.reactivex.rxkotlin.subscribeBy
 
-
 class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
     val showProgress = MutableLiveData<Boolean>()
     val dogData = MutableLiveData<Dogs>()
@@ -21,9 +20,8 @@ class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
     fun getDogPic(dog: String) {
         model.getDogInfo(dog)
             .doOnSubscribe { showProgress.postValue(true) }
-            .doAfterTerminate { showProgress.postValue(false) }
             .subscribeBy(onSuccess = {
                 dogData.postValue(it)
-            }, onError = {})
+            }, onError = {dogBreed.postValue(it.message)})
     }
 }

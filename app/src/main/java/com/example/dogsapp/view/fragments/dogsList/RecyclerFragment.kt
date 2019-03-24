@@ -1,7 +1,5 @@
 package com.example.dogsapp.view.fragments.dogsList
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +17,6 @@ import com.example.dogsapp.vm.DogsListViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.number_item.*
 import org.kodein.di.generic.instance
-
 
 class RecyclerFragment : Fragment() {
 

@@ -18,6 +18,5 @@ fun picassoModule() = Kodein.Module {
 private fun providePicasso(context: Context, okHttp3Downloader: OkHttp3Downloader): Picasso =
         Picasso.Builder(context).downloader(okHttp3Downloader).build()
 
-
 private fun provideOkHttp3Downloader(okHttpClient: OkHttpClient): OkHttp3Downloader =
         OkHttp3Downloader(okHttpClient)
