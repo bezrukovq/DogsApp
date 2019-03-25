@@ -10,5 +10,4 @@ class DogsListViewModel(private val model: DogsModel) : ViewModel() {
     fun getBreedList(){
         breedList.postValue(model.getBreedList())
     }
-
 }

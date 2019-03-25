@@ -24,6 +24,10 @@ android {
     }
 }
 
+ext{
+    kodein = "5.0.0"
+}
+
 detekt {
     version = "1.0.0-RC12"
     input = files("${project.rootDir}/${project.getName()}/src/main/java")
@@ -42,6 +46,10 @@ detekt {
 }
 
 dependencies {
+
+    // Kodein
+    implementation "org.kodein.di:kodein-di-generic-jvm:${kodein}"
+    implementation "org.kodein.di:kodein-di-framework-android:${kodein}"
 
     //Live data + view model
     implementation "android.arch.lifecycle:extensions:1.1.1"

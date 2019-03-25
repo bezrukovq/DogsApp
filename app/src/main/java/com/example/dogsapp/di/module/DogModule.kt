@@ -1,21 +1,20 @@
 package com.example.dogsapp.di.module
 
-import com.example.dogsapp.di.scope.DogScope
+
 import com.example.dogsapp.model.DogsApiService
 import com.example.dogsapp.model.DogsModel
 import com.example.dogsapp.view.fragments.dogsList.RecyclerAdapter
-import dagger.Module
-import dagger.Provides
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 
-@Module
-class DogModule {
-
-    @Provides
-    @DogScope
-    fun provideDogsModel(numFacApiService: DogsApiService): DogsModel =
-        DogsModel(numFacApiService)//
-
-    @Provides
-    @DogScope
-    fun provideDateListAdapter(): RecyclerAdapter = RecyclerAdapter { }//
+fun dogModule() = Kodein.Module {
+    bind<DogsModel>() with singleton { provideDogsModel(instance()) }
+    bind<RecyclerAdapter>() with singleton { provideDateListAdapter() }
 }
+
+fun provideDogsModel(numFacApiService: DogsApiService): DogsModel =
+    DogsModel(numFacApiService)//
+
+fun provideDateListAdapter(): RecyclerAdapter = RecyclerAdapter { }

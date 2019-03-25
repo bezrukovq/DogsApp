@@ -6,6 +6,6 @@ import kotlinx.android.synthetic.main.number_item.view.*
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bindViews(string: String) {
-        itemView.tv_date.text = string
+        itemView.tv_breed.text = string
     }
 }

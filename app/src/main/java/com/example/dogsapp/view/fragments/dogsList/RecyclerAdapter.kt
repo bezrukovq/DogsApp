@@ -10,13 +10,6 @@ class RecyclerAdapter(private var onItemClick: (String) -> Unit) : RecyclerView.
     var list: ArrayList<String> = arrayListOf()
     override fun getItemCount() = list.size
 
-    fun addAll(values: List<String>) {
-        for (value in values) {
-            list.add(value)
-            notifyItemInserted(list.size)
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.number_item, parent, false)
         return ViewHolder(v)
