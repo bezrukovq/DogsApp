@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,13 +16,12 @@ import com.example.dogsapp.view.fragments.dogsDetail.DogsDetailFragment
 import com.example.dogsapp.vm.BaseViewModelFactory
 import com.example.dogsapp.vm.DogsListViewModel
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.android.synthetic.main.number_item.*
 import org.kodein.di.generic.instance
 
 class RecyclerFragment : Fragment() {
 
     private val viewModelFactory: BaseViewModelFactory by di.instance()
-    private var recyclerAdapter = RecyclerAdapter { onItemClick(it) }
+    private var recyclerAdapter = RecyclerAdapter { x,z->onItemClick(x,z) }
     private lateinit var viewModel: DogsListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,21 +50,13 @@ class RecyclerFragment : Fragment() {
         recyclerAdapter.list = dogList
     }
 
-    private fun onItemClick(dog: String) {
-        activity?.let {
-            ViewCompat.getTransitionName(tv_breed)?.let { it1 ->
-                it.supportFragmentManager
-                    .beginTransaction()
-                    .setReorderingAllowed(true)
-                    .addSharedElement(tv_breed, it1)
-                    .addToBackStack("JoJo")
-                    .replace(
-                        R.id.container,
-                        DogsDetailFragment.newInstance(dog)
-                    )
-                    .commit()
-            }
-        }
+    private fun onItemClick(dog: String, tv: TextView) {
+        val trId = ViewCompat.getTransitionName(tv).toString()
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.addSharedElement(tv, trId)
+            ?.addToBackStack("JoJo")?.replace(R.id.container, DogsDetailFragment.newInstance(dog,trId))
+            ?.commit()
     }
 
     companion object {

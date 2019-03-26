@@ -20,6 +20,7 @@ class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
     fun getDogPic(dog: String) {
         model.getDogInfo(dog)
             .doOnSubscribe { showProgress.postValue(true) }
+            .doAfterTerminate{showProgress.postValue(false)}
             .subscribeBy(onSuccess = {
                 dogData.postValue(it)
             }, onError = {dogBreed.postValue(it.message)})
