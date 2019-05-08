@@ -24,7 +24,6 @@ class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
             val request = model.getDogInfo(dog)
             withContext(Dispatchers.Main) {
                 try {
-
                     val response = request.await()
                     if (response.isSuccessful) {
                         dogData.postValue(response.body())
