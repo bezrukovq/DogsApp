@@ -1,16 +1,16 @@
 package com.example.dogsapp.di.module
 
 import com.example.dogsapp.model.DogsApiService
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 fun netModule() = Kodein.Module {
-    bind<Retrofit>() with singleton { provideRetrofit(instance(), provideRxJava2CallAdapterFactory()) }
+    bind<Retrofit>() with singleton { provideRetrofit(instance(), provideCallAdapterFactory()) }
     bind<GsonConverterFactory>() with singleton { provideGsonConverterFactory() }
     bind<DogsApiService>() with singleton { instance<Retrofit>().create(DogsApiService::class.java) }
 }
@@ -18,12 +18,12 @@ fun netModule() = Kodein.Module {
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
-    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
-        RxJava2CallAdapterFactory.create()
+    fun provideCallAdapterFactory(): CoroutineCallAdapterFactory =
+        CoroutineCallAdapterFactory()
 
     fun provideRetrofit(
         converterFactory: GsonConverterFactory,
-        callAdapterFactory: RxJava2CallAdapterFactory
+        callAdapterFactory: CoroutineCallAdapterFactory
     ): Retrofit =
         Retrofit.Builder()
             .addCallAdapterFactory(callAdapterFactory)
