@@ -1,17 +1,14 @@
 package com.example.dogsapp.model
 
 import com.example.dogsapp.entity.Dogs
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import java.util.*
 
 class DogsModel(val dogApi : DogsApiService) {
 
-    fun getDogInfo(breed: String): Single<Dogs> =
+    fun getDogInfo(breed: String): Deferred<Response<Dogs>> =
         dogApi.getDateInfo(breed)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
 
     fun getBreedList(): ArrayList<String> {
         val list = ArrayList<String>()

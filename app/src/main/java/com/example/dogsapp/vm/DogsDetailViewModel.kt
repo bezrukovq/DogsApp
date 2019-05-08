@@ -1,11 +1,14 @@
 package com.example.dogsapp.vm
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.MutableLiveData
 import com.example.dogsapp.entity.Dogs
 import com.example.dogsapp.model.DogsModel
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
     val showProgress = MutableLiveData<Boolean>()
@@ -16,13 +19,23 @@ class DogsDetailViewModel(private val model: DogsModel) : ViewModel() {
         dogBreed.postValue(breed)
     }
 
-    @SuppressLint("CheckResult")
     fun getDogPic(dog: String) {
-        model.getDogInfo(dog)
-            .doOnSubscribe { showProgress.postValue(true) }
-            .doAfterTerminate{showProgress.postValue(false)}
-            .subscribeBy(onSuccess = {
-                dogData.postValue(it)
-            }, onError = {dogBreed.postValue(it.message)})
+        CoroutineScope(Dispatchers.IO).launch {
+            val request = model.getDogInfo(dog)
+            withContext(Dispatchers.Main) {
+                try {
+                    val response = request.await()
+                    if (response.isSuccessful) {
+                        dogData.postValue(response.body())
+                    } else {
+                        dogBreed.postValue(response.errorBody().toString())
+                    }
+                } catch (e: HttpException) {
+                    dogBreed.postValue(e.message)
+                } catch (e: Throwable) {
+                    dogBreed.postValue(e.message)
+                }
+            }
+        }
     }
 }

@@ -26,10 +26,9 @@ class DogsDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.activity?.let { ActivityCompat.postponeEnterTransition(it) }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setSharedElementEnterTransition(TransitionInflater.from(getContext())
-                .inflateTransition(android.R.transition.move));
-        }
+        setSharedElementEnterTransition(
+            TransitionInflater.from(getContext())
+                .inflateTransition(android.R.transition.move))
         /*
         val transition = TransitionInflater.from(context)
             .inflateTransition(R.transition.shared_element_transition)
@@ -79,7 +78,7 @@ class DogsDetailFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(dog: String, transitionId : String): DogsDetailFragment {
+        fun newInstance(dog: String, transitionId: String): DogsDetailFragment {
             val args = Bundle()
             args.putString("dog", dog)
             args.putString("trId", transitionId)
