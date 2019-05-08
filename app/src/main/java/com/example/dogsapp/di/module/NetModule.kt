@@ -1,46 +1,32 @@
 package com.example.dogsapp.di.module
 
-import dagger.Module
-import dagger.Provides
+import com.example.dogsapp.model.DogsApiService
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
-import javax.inject.Singleton
 
-@Module
-class NetModule {
+fun netModule() = Kodein.Module {
+    bind<Retrofit>() with singleton { provideRetrofit(instance(), provideRxJava2CallAdapterFactory()) }
+    bind<GsonConverterFactory>() with singleton { provideGsonConverterFactory() }
+    bind<DogsApiService>() with singleton { instance<Retrofit>().create(DogsApiService::class.java) }
+}
 
-    @Provides
-    @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
-    @Provides
-    @Singleton
     fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
         RxJava2CallAdapterFactory.create()
 
-    @Provides
-    @Singleton
     fun provideRetrofit(
         converterFactory: GsonConverterFactory,
-        callAdapterFactory: RxJava2CallAdapterFactory,
-        @Named(URL) baseUrl: String
+        callAdapterFactory: RxJava2CallAdapterFactory
     ): Retrofit =
         Retrofit.Builder()
             .addCallAdapterFactory(callAdapterFactory)
             .addConverterFactory(converterFactory)
-            .baseUrl(baseUrl)
+            .baseUrl("https://dog.ceo/api/breed/")
             .build()
-
-    @Provides
-    @Singleton
-    @Named(URL)
-    fun provideBaseUrlString(): String = URL
-
-    companion object {
-        private const val URL = "http://numbersapi.com/"
-    }
-
-}
